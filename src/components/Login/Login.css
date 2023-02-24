@@ -1,0 +1,25 @@
+.login-container {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container .input-container {
+  display: flex;
+  flex-direction: column;
+  padding: 60px 40px;
+  background-color: rgba(68, 68, 68, 0.1);
+}
+.login-container .input-container .input {
+  margin-bottom: 30px;
+}
+  
+.login-container .input-container .login-button {
+  height: 56px;
+}
+
+.login-container .signup-link {
+  padding-top: 40px;
+}
