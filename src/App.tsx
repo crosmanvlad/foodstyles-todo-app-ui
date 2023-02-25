@@ -5,6 +5,7 @@ import UserContext from './context/UserContext';
 import { getCookie } from './utils/cookie-handler';
 import { TOKEN } from './utils/constants';
 import Routes from './Routes';
+import './App.css';
 
 const App = () => {
   const [isLogged, setIsLogged] = useState(false);

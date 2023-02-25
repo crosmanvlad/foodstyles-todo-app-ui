@@ -17,12 +17,17 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+  };
+
+  const handleChangeVerifyPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVerifyPassword(event.target.value);
   };
 
   const handleClickShowPassword = () => {
@@ -38,9 +43,13 @@ const Signup = () => {
   };
 
   const submitSignup = async () => {
+    if (password !== verifyPassword) {
+      setShowError(true);
+      return;
+    }
     setShowError(false);
-    const accessToken = await AuthService.signup(name, email, password);
-    if (accessToken) {
+    const user = await AuthService.signup(name, email, password);
+    if (user) {
       navigate('/login');
     } else {
       setShowError(true);
@@ -70,28 +79,26 @@ const Signup = () => {
             onChange={handleChangeEmail}
             error={showError}
           />
-          <FormControl className="password input" variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={handleChangePassword}
-              error={showError}
-              endAdornment={
-                // eslint-disable-next-line react/jsx-wrap-multilines
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label={"toggle password visibility"}
-                    onClick={handleClickShowPassword}
-                    edge={"end"}
-                  >
-                    {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
+          <TextField
+            className="password input"
+            id="outline-password"
+            variant="outlined"
+            label="Password"
+            type="password"
+            value={password}
+            onChange={handleChangePassword}
+            error={showError}
+          />
+          <TextField
+            className="verify-password input"
+            id="outline-verify-password"
+            variant="outlined"
+            label="Verify Password"
+            type="password"
+            value={verifyPassword}
+            onChange={handleChangeVerifyPassword}
+            error={showError}
+          />
           <Button className="login-button" variant="contained" onClick={submitSignup}>
             Sign Up
           </Button>

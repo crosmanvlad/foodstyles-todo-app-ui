@@ -8,10 +8,13 @@ import Signup from './components/Signup/Signup';
 
 const Router = () => {
   const loginRedirect = () => {
+    console.log(getCookie(TOKEN))
     return <Navigate to="/home" />;
   };
 
   const logoutRedirect = () => {
+    console.log(getCookie(TOKEN))
+    console.log('tryingto go login')
     return <Navigate to="/login" />;
   };
 

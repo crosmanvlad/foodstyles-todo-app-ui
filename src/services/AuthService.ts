@@ -40,14 +40,8 @@ const signup = (name: string, username: string, password: string) => {
     });
 }
 
-const logout = () => {
-  removeCookie(TOKEN);
-  window.location.href = '/#/login';
-};
-
 const AuthService = {
   login,
-  logout,
   signup
 };
 
